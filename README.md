@@ -1,1 +1,1 @@
-# CPPCmakeTemplate
+# A C++ project template based on CMake
