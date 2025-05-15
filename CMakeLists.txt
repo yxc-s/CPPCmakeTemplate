@@ -11,10 +11,10 @@ get_filename_component(ROOT_NAME ${CMAKE_SOURCE_DIR} NAME) #第一个是变量�
 message("Configure project: ${ROOT_NAME}")
 project(${ROOT_NAME} VERSION 0.1 LANGUAGES CXX)
 
-
 #强制使用CPP 17 version
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED true)
 
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 add_subdirectory(Apps)
