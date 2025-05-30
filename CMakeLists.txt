@@ -15,6 +15,7 @@ project(${ROOT_NAME} VERSION 0.1 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED true)
 
+#设置某个属性 GLOBAL:全局cmake工程有效 USE_FOLDERS：是否使用文件夹视图
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 add_subdirectory(Apps)
