@@ -18,12 +18,26 @@ find_package(OpenCV REQUIRED)
 #OSG是模块化的库，默认find_package不找到所有子模块，需要自己指定
 find_package(OpenSceneGraph REQUIRED COMPONENTS osgUtil osgDB osgText osgGA osgFX osgSim osgViewer osgManipulator)
 
+#TODO:跟OSG一样模块化加载？
+find_package(CGAL REQUIRED)
+if (CGAL_FOUND) 
+    message(STATUS "CAGL version: ${CGAL_VERSION}")
+    message(STATUS "CGAL include dirs: ${CGAL_INCLUDE_DIRS}")
+    message(STATUS "CGAL libraries: ${CGAL_LIBRARIES}")
+endif()
+
+#使用CGAL时obj文件过大无法编译，需要增加下面的指令
+if (MSVC)
+    target_compile_options(${TARGET_NAME} PRIVATE /bigobj)
+endif()
+
 
 target_include_directories(
     ${TARGET_NAME} 
     PRIVATE 
     ${OpenCV_INCLUDE_DIRS}
     ${OPENSCENEGRAPH_INCLUDE_DIRS}
+    ${CGAL_INCLUDE_DIRS}
 )
 
 target_link_libraries(
@@ -31,4 +45,5 @@ target_link_libraries(
     PRIVATE 
     ${OpenCV_LIBS}
     ${OPENSCENEGRAPH_LIBRARIES}
+    ${CGAL_LIBRARIES}
 )
