@@ -14,48 +14,49 @@
             "generator": "Visual Studio 17 2022",
             "binaryDir": "${sourceDir}/builds/${presetName}",//sourceDir是内置变量，builds不存在会自己创建，presetName就是name
             "cacheVariables": {
-                "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+                "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/${presetName}"//不指定这个变量，就会默认安装到C盘programFiles
             }
         }
-    ],
-    "buildPresets":[
-        {
-            "name": "vs2022-x64-debug",
-            "configuration": "Debug",
-            "configurePreset": "vs2022-x64"
-        },
-        {
-            "name": "vs2022-x64-release",
-            "configuration": "Release",
-            "configurePreset": "vs2022-x64"
-        }
-    ],
-    "workflowPresets":[
-        {
-            "name": "vs2022-x64-release-workflow",
-            "steps": [
-                {
-                    "type": "configure",
-                    "name": "vs2022-x64"
-                },
-                {
-                    "type": "build",
-                    "name": "vs2022-x64-release"
-                }
-            ]
-        },
-        {
-            "name": "vs2022-x64-debug-workflow",
-            "steps":[
-                {
-                    "type": "configure",
-                    "name": "vs2022-x64"
-                },
-                {
-                    "type": "build",
-                    "name": "vs2022-x64-debug"
-                }
-            ]
-        }
-    ]
+     ]//,
+    // "buildPresets":[
+    //     {
+    //         "name": "vs2022-x64-debug",
+    //         "configuration": "Debug",
+    //         "configurePreset": "vs2022-x64"
+    //     },
+    //     {
+    //         "name": "vs2022-x64-release",
+    //         "configuration": "Release",
+    //         "configurePreset": "vs2022-x64"
+    //     }
+    // ],
+    // "workflowPresets":[
+    //     {
+    //         "name": "vs2022-x64-release-workflow",
+    //         "steps": [
+    //             {
+    //                 "type": "configure",
+    //                 "name": "vs2022-x64"
+    //             },
+    //             {
+    //                 "type": "build",
+    //                 "name": "vs2022-x64-release"
+    //             }
+    //         ]
+    //     },
+    //     {
+    //         "name": "vs2022-x64-debug-workflow",
+    //         "steps":[
+    //             {
+    //                 "type": "configure",
+    //                 "name": "vs2022-x64"
+    //             },
+    //             {
+    //                 "type": "build",
+    //                 "name": "vs2022-x64-debug"
+    //             }
+    //         ]
+    //     }
+    // ]
 }

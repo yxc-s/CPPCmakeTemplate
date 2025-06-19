@@ -1,9 +1,6 @@
 {
     "name": "vcpkg-deps",
     "version-string": "latest",
-    "dependencies": [
-        "opencv",
-        "osg",
-        "cgal"
-    ]
+    "dependencies": [],
+    "builtin-baseline": "2a80e7357441c65675c3951c43a3e6e91f836410" 
 }
