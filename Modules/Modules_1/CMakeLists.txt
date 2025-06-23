@@ -1,0 +1,50 @@
+get_filename_component(PARENT_DIR ${CMAKE_CURRENT_SOURCE_DIR} DIRECTORY)
+get_filename_component(NAMESPACE ${PARENT_DIR} NAME)
+get_filename_component(TARGET_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
+
+# message( "PARENT DIR: ${PARENT_DIR}")
+# message( "PARENT DIR: ${NAMESPACE}")
+# message( "PARENT DIR: ${TARGET_NAME}")
+
+option(${NAMESPACE}_${TARGET_NAME}_SHARED "target shared lib" ON)
+configure_file(Export.h.in ${CMAKE_CURRENT_LIST_DIR}/Export.h @ONLY)
+
+file(GLOB_RECURSE HEADER_FILES "*.h")
+file(GLOB_RECURSE CPP_FILES "*.cpp")
+
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${HEADER_FILES} ${CPP_FILES})
+
+if (${NAMESPACE}_${TARGET_NAME}_SHARED)
+add_library(${TARGET_NAME} SHARED ${HEADER_FILES} ${CPP_FILES})
+else()
+add_library(${TARGET_NAME} STATIC ${HEADER_FILES} ${CPP_FILES})
+endif()
+
+set_target_properties(${TARGET_NAME} PROPERTIES CXX_STANDARD 17)
+set_targeT_properties(${TARGET_NAME} PROPERTIES FOLDER ${NAMESPACE}/${TARGET_NAME})
+
+target_compile_definitions(
+    ${TARGET_NAME}
+    PRIVATE
+    ${TARGET_NAME}_DLL_LIB_EXPORT
+)
+target_compile_definitions(
+    ${TARGET_NAME}
+    PUBLIC
+    ${TARGET_NAME}_DLL_LIB
+)
+
+install (TARGETS ${TARGET_NAME}
+    EXPORT ${TARGET_NAME}
+    INCLUDES DESTINATION include/${TARGET_NAME}
+)
+
+install(FILES ${HEADER_FILES} DESTINATION include/${NAMESPACE}/${TARGET_NAME})
+install(FILES ${CPP_FILES} DESTINATION include/${NAMESPACE}/${TARGET_NAME})
+
+#todo: why?
+install(EXPORT ${TARGET_NAME}
+  DESTINATION cmake/${TARGET_NAME}
+  FILE ${TARGET_NAME}-config.cmake
+  NAMESPACE ${NAMESPACE}::
+)
