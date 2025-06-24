@@ -20,6 +20,7 @@ else()
 add_library(${TARGET_NAME} STATIC ${HEADER_FILES} ${CPP_FILES})
 endif()
 
+add_library(${NAMESPACE}::${TARGET_NAME} ALIAS ${TARGET_NAME})#保证库内部可见
 set_target_properties(${TARGET_NAME} PROPERTIES CXX_STANDARD 17)
 set_targeT_properties(${TARGET_NAME} PROPERTIES FOLDER ${NAMESPACE}/${TARGET_NAME})
 
