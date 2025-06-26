@@ -61,8 +61,6 @@ install (TARGETS ${TARGET_NAME}
 #install(FILES "${GLFW_DLL_FULLPATH}" DESTINATION bin)
 
 install(FILES ${HEADER_FILES} DESTINATION include/${NAMESPACE}/${TARGET_NAME})
-#TODO: no need to copy cpp files
-install(FILES ${CPP_FILES} DESTINATION include/${NAMESPACE}/${TARGET_NAME})
 
 #todo: why?
 install(EXPORT ${TARGET_NAME}
