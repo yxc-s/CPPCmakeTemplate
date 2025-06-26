@@ -50,12 +50,18 @@ target_compile_definitions(
     ${TARGET_NAME}_DLL_LIB
 )
 
+#TODO:??
 install (TARGETS ${TARGET_NAME}
     EXPORT ${TARGET_NAME}
     INCLUDES DESTINATION include/${TARGET_NAME}
 )
 
+#如果有当前项目依赖的库，如glfw，可以使用这种方式：
+#get_target_property(GLFW_DLL_FULLPATH glfw LOCATION)
+#install(FILES "${GLFW_DLL_FULLPATH}" DESTINATION bin)
+
 install(FILES ${HEADER_FILES} DESTINATION include/${NAMESPACE}/${TARGET_NAME})
+#TODO: no need to copy cpp files
 install(FILES ${CPP_FILES} DESTINATION include/${NAMESPACE}/${TARGET_NAME})
 
 #todo: why?
