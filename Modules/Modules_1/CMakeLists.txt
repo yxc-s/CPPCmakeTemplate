@@ -24,6 +24,21 @@ add_library(${NAMESPACE}::${TARGET_NAME} ALIAS ${TARGET_NAME})#保证库内部�
 set_target_properties(${TARGET_NAME} PROPERTIES CXX_STANDARD 17)
 set_targeT_properties(${TARGET_NAME} PROPERTIES FOLDER ${NAMESPACE}/${TARGET_NAME})
 
+
+#find_package()
+
+target_link_libraries(
+    ${TARGET_NAME}
+    PRIVATE
+    # ""
+)
+target_include_directories(
+    ${TARGET_NAME}
+    PRIVATE
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+)
+
+
 target_compile_definitions(
     ${TARGET_NAME}
     PRIVATE
