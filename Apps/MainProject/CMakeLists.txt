@@ -37,3 +37,8 @@ target_link_libraries(
     # ${OPENSCENEGRAPH_LIBRARIES}
     # ${CGAL_LIBRARIES}
 )
+
+#RUNTIME表示install的是可执行文件
+install(TARGETS ${TARGET_NAME}
+    RUNTIME DESTINATION bin
+)
